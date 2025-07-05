@@ -7,17 +7,20 @@ Your "Carbs Are Here" app is now ready to be deployed to GitHub Pages. Here's wh
 ### ✅ What's Been Set Up:
 
 1. **GitHub Pages Configuration**
+
    - Added `gh-pages` package for deployment
    - Updated `package.json` with deployment scripts
    - Set correct homepage URL
    - Configured Vite for GitHub Pages
 
 2. **Optimized Build Configuration**
+
    - Code splitting for better performance
    - Separate chunks for vendor, UI, and barcode libraries
    - Proper asset handling
 
 3. **GitHub Actions Workflow**
+
    - Automatic deployment on push to main branch
    - Runs linting and builds before deployment
    - Uses modern GitHub Actions
@@ -39,6 +42,7 @@ yarn deploy
 ## 🔧 GitHub Repository Setup:
 
 1. **Push your code to GitHub:**
+
    ```bash
    git add .
    git commit -m "Add GitHub Pages deployment configuration"
@@ -46,6 +50,7 @@ yarn deploy
    ```
 
 2. **Enable GitHub Pages:**
+
    - Go to your repository on GitHub
    - Navigate to Settings → Pages
    - Under "Source", select "Deploy from a branch"
@@ -61,6 +66,7 @@ yarn deploy
 ## 🔄 Automatic Deployment:
 
 After the initial setup, every push to the `main` branch will automatically:
+
 1. Run ESLint checks
 2. Build the project
 3. Deploy to GitHub Pages
@@ -68,6 +74,7 @@ After the initial setup, every push to the `main` branch will automatically:
 ## 📱 Live App Features:
 
 Once deployed, your app will have:
+
 - ✅ Mobile-first responsive design
 - ✅ Camera-based barcode scanning
 - ✅ Real-time nutrition data from Open Food Facts
@@ -93,11 +100,13 @@ Once deployed, your app will have:
 5. Share the URL with others!
 
 ## 🔗 Your App URL:
+
 `https://letomjames.github.io/letomjames-carbsarehere/`
 
 ## 📞 Troubleshooting:
 
 If you encounter issues:
+
 - Check the GitHub Actions logs in the "Actions" tab
 - Ensure camera permissions are granted in browsers
 - Test on different devices and browsers

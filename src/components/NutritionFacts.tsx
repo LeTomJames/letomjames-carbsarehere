@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from "react";
 import {
   Card,
   Text,
@@ -12,7 +12,8 @@ import {
   Grid,
   Paper,
   ThemeIcon,
-} from '@mantine/core'
+  Switch,
+} from "@mantine/core";
 import {
   IconFlame,
   IconDroplet,
@@ -20,66 +21,68 @@ import {
   IconMeat,
   IconSalt,
   IconApple,
-} from '@tabler/icons-react'
-import type { Product } from '../App'
+} from "@tabler/icons-react";
+import type { Product } from "../App";
 
 interface NutritionFactsProps {
-  product: Product
+  product: Product;
 }
 
 const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
+  const [useKcal, setUseKcal] = useState(true); // true for kcal, false for cal
+
   const getNutritionGradeColor = (grade: string) => {
     switch (grade?.toLowerCase()) {
-      case 'a':
-        return 'green'
-      case 'b':
-        return 'lime'
-      case 'c':
-        return 'yellow'
-      case 'd':
-        return 'orange'
-      case 'e':
-        return 'red'
+      case "a":
+        return "green";
+      case "b":
+        return "lime";
+      case "c":
+        return "yellow";
+      case "d":
+        return "orange";
+      case "e":
+        return "red";
       default:
-        return 'gray'
+        return "gray";
     }
-  }
+  };
 
   const getNutritionGradeLabel = (grade: string) => {
     switch (grade?.toLowerCase()) {
-      case 'a':
-        return 'Excellent'
-      case 'b':
-        return 'Good'
-      case 'c':
-        return 'Average'
-      case 'd':
-        return 'Poor'
-      case 'e':
-        return 'Bad'
+      case "a":
+        return "Excellent";
+      case "b":
+        return "Good";
+      case "c":
+        return "Average";
+      case "d":
+        return "Poor";
+      case "e":
+        return "Bad";
       default:
-        return 'Not rated'
+        return "Not rated";
     }
-  }
+  };
 
   const getProgressColor = (value: number, max: number) => {
-    const percentage = (value / max) * 100
-    if (percentage > 75) return 'red'
-    if (percentage > 50) return 'yellow'
-    if (percentage > 25) return 'lime'
-    return 'green'
-  }
+    const percentage = (value / max) * 100;
+    if (percentage > 75) return "red";
+    if (percentage > 50) return "yellow";
+    if (percentage > 25) return "lime";
+    return "green";
+  };
 
-  const nutrients = product.nutriments || {}
-  const calories = nutrients['energy-kcal_100g'] || 0
-  const fat = nutrients['fat_100g'] || 0
-  const saturatedFat = nutrients['saturated-fat_100g'] || 0
-  const carbs = nutrients['carbohydrates_100g'] || 0
-  const sugars = nutrients['sugars_100g'] || 0
-  const fiber = nutrients['fiber_100g'] || 0
-  const protein = nutrients['proteins_100g'] || 0
-  const salt = nutrients['salt_100g'] || 0
-  const sodium = nutrients['sodium_100g'] || 0
+  const nutrients = product.nutriments || {};
+  const calories = nutrients["energy-kcal_100g"] || 0;
+  const fat = nutrients["fat_100g"] || 0;
+  const saturatedFat = nutrients["saturated-fat_100g"] || 0;
+  const carbs = nutrients["carbohydrates_100g"] || 0;
+  const sugars = nutrients["sugars_100g"] || 0;
+  const fiber = nutrients["fiber_100g"] || 0;
+  const protein = nutrients["proteins_100g"] || 0;
+  const salt = nutrients["salt_100g"] || 0;
+  const sodium = nutrients["sodium_100g"] || 0;
 
   return (
     <Stack gap="md" mt="md">
@@ -98,7 +101,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
           )}
           <div style={{ flex: 1 }}>
             <Title order={3} lineClamp={2} mb="xs">
-              {product.product_name || 'Unknown Product'}
+              {product.product_name || "Unknown Product"}
             </Title>
             {product.brands && (
               <Text size="sm" c="dimmed" mb="xs">
@@ -111,7 +114,8 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                 size="lg"
                 variant="filled"
               >
-                Nutri-Score {product.nutrition_grades.toUpperCase()} - {getNutritionGradeLabel(product.nutrition_grades)}
+                Nutri-Score {product.nutrition_grades.toUpperCase()} -{" "}
+                {getNutritionGradeLabel(product.nutrition_grades)}
               </Badge>
             )}
           </div>
@@ -129,21 +133,44 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
 
         <Stack gap="sm">
           {/* Calories */}
-          <Paper p="sm" radius="md" style={{ backgroundColor: 'var(--mantine-color-blue-0)' }}>
+          <Paper
+            p="sm"
+            radius="md"
+            style={{ backgroundColor: "var(--mantine-color-blue-0)" }}
+          >
             <Group justify="space-between" align="center">
               <Group gap="sm">
                 <ThemeIcon color="blue" variant="light" size="lg">
                   <IconFlame size={20} />
                 </ThemeIcon>
                 <div>
-                  <Text fw={500}>Calories</Text>
+                  <Group gap="xs" align="center">
+                    <Text fw={500}>Calories</Text>
+                    <Switch
+                      size="xs"
+                      checked={useKcal}
+                      onChange={(event) =>
+                        setUseKcal(event.currentTarget.checked)
+                      }
+                      onLabel="kcal"
+                      offLabel="cal"
+                      color="blue"
+                      title={
+                        useKcal
+                          ? "Switch to calories (cal)"
+                          : "Switch to kilocalories (kcal)"
+                      }
+                    />
+                  </Group>
                   <Text size="sm" c="dimmed">
-                    Energy
+                    Energy {useKcal ? "(kilocalories)" : "(calories)"}
                   </Text>
                 </div>
               </Group>
               <Text size="xl" fw={700} c="blue">
-                {calories.toFixed(0)} kcal
+                {useKcal
+                  ? `${calories.toFixed(0)} kcal`
+                  : `${(calories * 1000).toFixed(0)} cal`}
               </Text>
             </Group>
           </Paper>
@@ -260,10 +287,15 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                     </Text>
                   </Group>
                   <Text size="lg" fw={600} mb="xs">
-                    {salt > 0 ? `${salt.toFixed(2)}g` : `${(sodium * 2.5).toFixed(2)}g`}
+                    {salt > 0
+                      ? `${salt.toFixed(2)}g`
+                      : `${(sodium * 2.5).toFixed(2)}g`}
                   </Text>
                   <Progress
-                    value={Math.min((salt > 0 ? salt : sodium * 2.5) / 6 * 100, 100)}
+                    value={Math.min(
+                      ((salt > 0 ? salt : sodium * 2.5) / 6) * 100,
+                      100
+                    )}
                     color={getProgressColor(salt > 0 ? salt : sodium * 2.5, 6)}
                     size="sm"
                   />
@@ -286,7 +318,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
         </Card>
       )}
     </Stack>
-  )
-}
+  );
+};
 
-export default NutritionFacts
+export default NutritionFacts;

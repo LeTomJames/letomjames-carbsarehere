@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   AppShell,
   Button,
@@ -13,113 +13,124 @@ import {
   Group,
   Paper,
   rem,
-} from '@mantine/core'
-import { notifications } from '@mantine/notifications'
-import { IconScan, IconInfoCircle, IconX } from '@tabler/icons-react'
-import BarcodeScanner from './components/BarcodeScanner'
-import NutritionFacts from './components/NutritionFacts'
-import { getNutritionData } from './services/nutritionApi'
-import './App.css'
+} from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { IconScan, IconInfoCircle, IconX } from "@tabler/icons-react";
+import BarcodeScanner from "./components/BarcodeScanner";
+import NutritionFacts from "./components/NutritionFacts";
+import { getNutritionData } from "./services/nutritionApi";
+import "./App.css";
 
 export interface Product {
-  product_name: string
-  brands: string
-  image_url: string
+  product_name: string;
+  brands: string;
+  image_url: string;
   nutriments: {
-    'energy-kcal_100g': number
-    'fat_100g': number
-    'saturated-fat_100g': number
-    'carbohydrates_100g': number
-    'sugars_100g': number
-    'fiber_100g': number
-    'proteins_100g': number
-    'salt_100g': number
-    'sodium_100g': number
-  }
-  nutrition_grades: string
-  ingredients_text: string
+    "energy-kcal_100g": number;
+    fat_100g: number;
+    "saturated-fat_100g": number;
+    carbohydrates_100g: number;
+    sugars_100g: number;
+    fiber_100g: number;
+    proteins_100g: number;
+    salt_100g: number;
+    sodium_100g: number;
+  };
+  nutrition_grades: string;
+  ingredients_text: string;
 }
 
 function App() {
-  const [isScanning, setIsScanning] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [product, setProduct] = useState<Product | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [isScanning, setIsScanning] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleScanStart = () => {
-    setIsScanning(true)
-    setProduct(null)
-    setError(null)
-  }
+    setIsScanning(true);
+    setProduct(null);
+    setError(null);
+  };
 
   const handleScanResult = async (barcode: string) => {
-    setIsScanning(false)
-    setIsLoading(true)
-    setError(null)
+    setIsScanning(false);
+    setIsLoading(true);
+    setError(null);
 
     try {
-      const productData = await getNutritionData(barcode)
+      const productData = await getNutritionData(barcode);
       if (productData) {
-        setProduct(productData)
+        setProduct(productData);
         notifications.show({
-          title: 'Product Found!',
+          title: "Product Found!",
           message: `Found ${productData.product_name}`,
-          color: 'green',
-        })
+          color: "green",
+        });
       } else {
-        setError('Product not found. Please try scanning again.')
+        setError("Product not found. Please try scanning again.");
         notifications.show({
-          title: 'Product Not Found',
-          message: 'This product is not in our database.',
-          color: 'red',
-        })
+          title: "Product Not Found",
+          message: "This product is not in our database.",
+          color: "red",
+        });
       }
     } catch {
-      setError('Failed to fetch product data. Please try again.')
+      setError("Failed to fetch product data. Please try again.");
       notifications.show({
-        title: 'Error',
-        message: 'Failed to fetch product data',
-        color: 'red',
-      })
+        title: "Error",
+        message: "Failed to fetch product data",
+        color: "red",
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleScanError = (error: string) => {
-    setIsScanning(false)
-    setError(error)
+    setIsScanning(false);
+    setError(error);
     notifications.show({
-      title: 'Scan Error',
+      title: "Scan Error",
       message: error,
-      color: 'red',
-    })
-  }
+      color: "red",
+    });
+  };
 
   const handleScanCancel = () => {
-    setIsScanning(false)
-  }
+    setIsScanning(false);
+  };
 
   const handleReset = () => {
-    setProduct(null)
-    setError(null)
-  }
+    setProduct(null);
+    setError(null);
+  };
 
   return (
     <AppShell
-      header={{ height: 60 }}
+      header={{ height: 70 }}
       padding="md"
       style={{
-        minHeight: '100vh',
-        backgroundColor: 'var(--mantine-color-gray-0)',
+        minHeight: "100vh",
+        backgroundColor: "#ffffff",
       }}
     >
-      <AppShell.Header>
+      <AppShell.Header
+        style={{
+          backgroundColor: "white",
+          borderBottom: "2px solid #e9ecef",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        }}
+      >
         <Container size="sm" h="100%">
           <Group h="100%" justify="space-between">
-            <Title order={2} c="blue">
-              Carbs Are Here
-            </Title>
+            <Group gap="sm">
+              <Text size="xl" className="food-emojis">
+                🍔🍕🥗🍎🥖🧀
+              </Text>
+              <Title order={2} c="blue" fw={700}>
+                Carbs Are Here
+              </Title>
+            </Group>
             {(product || error) && (
               <Button
                 variant="light"
@@ -149,8 +160,12 @@ function App() {
               <Paper
                 radius="xl"
                 p="xl"
-                bg="gradient-to-r from-blue-500 to-purple-600"
-                style={{ textAlign: 'center' }}
+                style={{
+                  textAlign: "center",
+                  background:
+                    "linear-gradient(135deg, #4c6ef5 0%, #7c3aed 100%)",
+                  boxShadow: "0 8px 32px rgba(76, 110, 245, 0.3)",
+                }}
               >
                 <Title order={1} c="white" mb="md">
                   🥗 Carbs Are Here
@@ -174,7 +189,17 @@ function App() {
                 </Button>
               </Paper>
 
-              <Card shadow="sm" padding="lg" radius="md" withBorder>
+              <Card
+                shadow="lg"
+                padding="lg"
+                radius="md"
+                withBorder
+                style={{
+                  backgroundColor: "white",
+                  border: "1px solid #e9ecef",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                }}
+              >
                 <Stack gap="sm">
                   <Group>
                     <IconInfoCircle size={20} color="blue" />
@@ -218,7 +243,7 @@ function App() {
         </Container>
       </AppShell.Main>
     </AppShell>
-  )
+  );
 }
 
-export default App
+export default App;
