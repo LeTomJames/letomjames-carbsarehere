@@ -25,16 +25,27 @@ export interface Product {
   product_name: string;
   brands: string;
   image_url: string;
+  serving_size?: string;
+  serving_quantity?: number;
   nutriments: {
     "energy-kcal_100g": number;
+    "energy-kcal_serving"?: number;
     fat_100g: number;
+    fat_serving?: number;
     "saturated-fat_100g": number;
+    "saturated-fat_serving"?: number;
     carbohydrates_100g: number;
+    carbohydrates_serving?: number;
     sugars_100g: number;
+    sugars_serving?: number;
     fiber_100g: number;
+    fiber_serving?: number;
     proteins_100g: number;
+    proteins_serving?: number;
     salt_100g: number;
+    salt_serving?: number;
     sodium_100g: number;
+    sodium_serving?: number;
   };
   nutrition_grades: string;
   ingredients_text: string;
@@ -45,11 +56,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [scannerKey, setScannerKey] = useState(0); // Key to force remount
 
   const handleScanStart = () => {
     setIsScanning(true);
     setProduct(null);
     setError(null);
+    setScannerKey((prev) => prev + 1); // Force remount of scanner
   };
 
   const handleScanResult = async (barcode: string) => {
@@ -144,6 +157,7 @@ function App() {
         <Container size="sm" py="xl">
           {isScanning && (
             <BarcodeScanner
+              key={scannerKey} // Force remount for fresh state
               onResult={handleScanResult}
               onError={handleScanError}
               onCancel={handleScanCancel}

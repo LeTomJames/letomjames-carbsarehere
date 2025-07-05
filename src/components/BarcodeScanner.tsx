@@ -100,15 +100,21 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
     }
   }, [stream]);
 
-  const handleUserMedia = useCallback((mediaStream: MediaStream) => {
-    setStream(mediaStream);
-  }, []);
+  const handleUserMedia = useCallback(
+    (mediaStream: MediaStream) => {
+      setStream(mediaStream);
+      // Start scanning when camera is ready
+      setTimeout(() => {
+        startScanning();
+      }, 500);
+    },
+    [startScanning]
+  );
 
   useEffect(() => {
-    if (webcamRef.current?.video) {
-      startScanning();
-    }
-  }, [startScanning]);
+    // Reset detection flag when component mounts
+    hasDetectedRef.current = false;
+  }, []);
 
   useEffect(() => {
     return () => {

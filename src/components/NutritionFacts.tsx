@@ -73,16 +73,68 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
     return "green";
   };
 
+  // Adjust progress bar max values based on serving vs per 100g
+  const getProgressMax = (nutrient: string, defaultMax: number) => {
+    if (!isPerServing) return defaultMax;
+    // For per-serving, we use lower max values as serving sizes are typically smaller
+    const servingMaxValues: { [key: string]: number } = {
+      fat: 20, // vs 35 for 100g
+      carbs: 30, // vs 50 for 100g
+      protein: 25, // vs 50 for 100g
+      fiber: 15, // vs 25 for 100g
+      salt: 2.5, // vs 6 for 100g
+    };
+    return servingMaxValues[nutrient] || defaultMax;
+  };
+
   const nutrients = product.nutriments || {};
-  const calories = nutrients["energy-kcal_100g"] || 0;
-  const fat = nutrients["fat_100g"] || 0;
-  const saturatedFat = nutrients["saturated-fat_100g"] || 0;
-  const carbs = nutrients["carbohydrates_100g"] || 0;
-  const sugars = nutrients["sugars_100g"] || 0;
-  const fiber = nutrients["fiber_100g"] || 0;
-  const protein = nutrients["proteins_100g"] || 0;
-  const salt = nutrients["salt_100g"] || 0;
-  const sodium = nutrients["sodium_100g"] || 0;
+
+  // Determine if we should show per serving or per 100g
+  const hasServingData =
+    nutrients["energy-kcal_serving"] !== undefined ||
+    nutrients["fat_serving"] !== undefined ||
+    nutrients["carbohydrates_serving"] !== undefined ||
+    nutrients["proteins_serving"] !== undefined;
+
+  const isPerServing = hasServingData;
+  const servingSize = product.serving_size || "1 serving";
+
+  // Get nutrition values (prefer serving data if available)
+  const calories = isPerServing
+    ? nutrients["energy-kcal_serving"] || 0
+    : nutrients["energy-kcal_100g"] || 0;
+
+  const fat = isPerServing
+    ? nutrients["fat_serving"] || 0
+    : nutrients["fat_100g"] || 0;
+
+  const saturatedFat = isPerServing
+    ? nutrients["saturated-fat_serving"] || 0
+    : nutrients["saturated-fat_100g"] || 0;
+
+  const carbs = isPerServing
+    ? nutrients["carbohydrates_serving"] || 0
+    : nutrients["carbohydrates_100g"] || 0;
+
+  const sugars = isPerServing
+    ? nutrients["sugars_serving"] || 0
+    : nutrients["sugars_100g"] || 0;
+
+  const fiber = isPerServing
+    ? nutrients["fiber_serving"] || 0
+    : nutrients["fiber_100g"] || 0;
+
+  const protein = isPerServing
+    ? nutrients["proteins_serving"] || 0
+    : nutrients["proteins_100g"] || 0;
+
+  const salt = isPerServing
+    ? nutrients["salt_serving"] || 0
+    : nutrients["salt_100g"] || 0;
+
+  const sodium = isPerServing
+    ? nutrients["sodium_serving"] || 0
+    : nutrients["sodium_100g"] || 0;
 
   return (
     <Stack gap="md" mt="md">
@@ -127,7 +179,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
         <Group justify="space-between" align="center" mb="md">
           <Title order={4}>Nutrition Facts</Title>
           <Text size="sm" c="dimmed">
-            per 100g
+            per {isPerServing ? servingSize : "100g"}
           </Text>
         </Group>
 
@@ -193,8 +245,8 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                   {fat.toFixed(1)}g
                 </Text>
                 <Progress
-                  value={Math.min((fat / 35) * 100, 100)}
-                  color={getProgressColor(fat, 35)}
+                  value={Math.min((fat / getProgressMax("fat", 35)) * 100, 100)}
+                  color={getProgressColor(fat, getProgressMax("fat", 35))}
                   size="sm"
                   mb="xs"
                 />
@@ -220,8 +272,11 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                   {carbs.toFixed(1)}g
                 </Text>
                 <Progress
-                  value={Math.min((carbs / 50) * 100, 100)}
-                  color={getProgressColor(carbs, 50)}
+                  value={Math.min(
+                    (carbs / getProgressMax("carbs", 50)) * 100,
+                    100
+                  )}
+                  color={getProgressColor(carbs, getProgressMax("carbs", 50))}
                   size="sm"
                   mb="xs"
                 />
@@ -247,7 +302,10 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                   {protein.toFixed(1)}g
                 </Text>
                 <Progress
-                  value={Math.min((protein / 50) * 100, 100)}
+                  value={Math.min(
+                    (protein / getProgressMax("protein", 50)) * 100,
+                    100
+                  )}
                   color="green"
                   size="sm"
                 />
@@ -268,7 +326,10 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                   {fiber.toFixed(1)}g
                 </Text>
                 <Progress
-                  value={Math.min((fiber / 25) * 100, 100)}
+                  value={Math.min(
+                    (fiber / getProgressMax("fiber", 25)) * 100,
+                    100
+                  )}
                   color="teal"
                   size="sm"
                 />
@@ -293,10 +354,15 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                   </Text>
                   <Progress
                     value={Math.min(
-                      ((salt > 0 ? salt : sodium * 2.5) / 6) * 100,
+                      ((salt > 0 ? salt : sodium * 2.5) /
+                        getProgressMax("salt", 6)) *
+                        100,
                       100
                     )}
-                    color={getProgressColor(salt > 0 ? salt : sodium * 2.5, 6)}
+                    color={getProgressColor(
+                      salt > 0 ? salt : sodium * 2.5,
+                      getProgressMax("salt", 6)
+                    )}
                     size="sm"
                   />
                 </Paper>
