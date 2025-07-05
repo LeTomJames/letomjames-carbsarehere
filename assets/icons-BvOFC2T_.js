@@ -1,4 +1,4 @@
-import{r as e}from"./mantine-Bwg6CtyN.js";/**
+import{r as e}from"./mantine-DpWYrqXi.js";/**
  * @license @tabler/icons-react v3.34.0 - MIT
  *
  * This source code is licensed under the MIT license.
@@ -8,12 +8,12 @@ import{r as e}from"./mantine-Bwg6CtyN.js";/**
  *
  * This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory of this source tree.
- */const a=(l,n,v,h)=>{const c=e.forwardRef(({color:r="currentColor",size:o=24,stroke:p=2,title:s,className:d,children:t,...g},k)=>e.createElement("svg",{ref:k,...M[l],width:o,height:o,className:["tabler-icon",`tabler-icon-${n}`,d].join(" "),strokeWidth:p,stroke:r,...g},[s&&e.createElement("title",{key:"svg-title"},s),...h.map(([i,y])=>e.createElement(i,y)),...Array.isArray(t)?t:[t]]));return c.displayName=`${v}`,c};/**
+ */const a=(s,l,v,h)=>{const c=e.forwardRef(({color:r="currentColor",size:o=24,stroke:p=2,title:n,className:d,children:t,...g},k)=>e.createElement("svg",{ref:k,...M[s],width:o,height:o,className:["tabler-icon",`tabler-icon-${l}`,d].join(" "),strokeWidth:p,stroke:r,...g},[n&&e.createElement("title",{key:"svg-title"},n),...h.map(([i,y])=>e.createElement(i,y)),...Array.isArray(t)?t:[t]]));return c.displayName=`${v}`,c};/**
  * @license @tabler/icons-react v3.34.0 - MIT
  *
  * This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory of this source tree.
- */var m=a("outline","apple","IconApple",[["path",{d:"M4 11.319c0 3.102 .444 5.319 2.222 7.978c1.351 1.797 3.156 2.247 5.08 .988c.426 -.268 .97 -.268 1.397 0c1.923 1.26 3.728 .809 5.079 -.988c1.778 -2.66 2.222 -4.876 2.222 -7.977c0 -2.661 -1.99 -5.32 -4.444 -5.32c-1.267 0 -2.41 .693 -3.22 1.44a.5 .5 0 0 1 -.672 0c-.809 -.746 -1.953 -1.44 -3.22 -1.44c-2.454 0 -4.444 2.66 -4.444 5.319",key:"svg-0"}],["path",{d:"M7 12c0 -1.47 .454 -2.34 1.5 -3",key:"svg-1"}],["path",{d:"M12 7c0 -1.2 .867 -4 3 -4",key:"svg-2"}]]);/**
+ */var I=a("outline","apple","IconApple",[["path",{d:"M4 11.319c0 3.102 .444 5.319 2.222 7.978c1.351 1.797 3.156 2.247 5.08 .988c.426 -.268 .97 -.268 1.397 0c1.923 1.26 3.728 .809 5.079 -.988c1.778 -2.66 2.222 -4.876 2.222 -7.977c0 -2.661 -1.99 -5.32 -4.444 -5.32c-1.267 0 -2.41 .693 -3.22 1.44a.5 .5 0 0 1 -.672 0c-.809 -.746 -1.953 -1.44 -3.22 -1.44c-2.454 0 -4.444 2.66 -4.444 5.319",key:"svg-0"}],["path",{d:"M7 12c0 -1.47 .454 -2.34 1.5 -3",key:"svg-1"}],["path",{d:"M12 7c0 -1.2 .867 -4 3 -4",key:"svg-2"}]]);/**
  * @license @tabler/icons-react v3.34.0 - MIT
  *
  * This source code is licensed under the MIT license.
@@ -43,19 +43,29 @@ import{r as e}from"./mantine-Bwg6CtyN.js";/**
  *
  * This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory of this source tree.
- */var A=a("outline","salt","IconSalt",[["path",{d:"M12 13v.01",key:"svg-0"}],["path",{d:"M10 16v.01",key:"svg-1"}],["path",{d:"M14 16v.01",key:"svg-2"}],["path",{d:"M7.5 8h9l-.281 -2.248a2 2 0 0 0 -1.985 -1.752h-4.468a2 2 0 0 0 -1.986 1.752l-.28 2.248z",key:"svg-3"}],["path",{d:"M7.5 8l-1.612 9.671a2 2 0 0 0 1.973 2.329h8.278a2 2 0 0 0 1.973 -2.329l-1.612 -9.671",key:"svg-4"}]]);/**
+ */var S=a("outline","moon","IconMoon",[["path",{d:"M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z",key:"svg-0"}]]);/**
  * @license @tabler/icons-react v3.34.0 - MIT
  *
  * This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory of this source tree.
- */var b=a("outline","scan","IconScan",[["path",{d:"M4 7v-1a2 2 0 0 1 2 -2h2",key:"svg-0"}],["path",{d:"M4 17v1a2 2 0 0 0 2 2h2",key:"svg-1"}],["path",{d:"M16 4h2a2 2 0 0 1 2 2v1",key:"svg-2"}],["path",{d:"M16 20h2a2 2 0 0 0 2 -2v-1",key:"svg-3"}],["path",{d:"M5 12l14 0",key:"svg-4"}]]);/**
+ */var z=a("outline","salt","IconSalt",[["path",{d:"M12 13v.01",key:"svg-0"}],["path",{d:"M10 16v.01",key:"svg-1"}],["path",{d:"M14 16v.01",key:"svg-2"}],["path",{d:"M7.5 8h9l-.281 -2.248a2 2 0 0 0 -1.985 -1.752h-4.468a2 2 0 0 0 -1.986 1.752l-.28 2.248z",key:"svg-3"}],["path",{d:"M7.5 8l-1.612 9.671a2 2 0 0 0 1.973 2.329h8.278a2 2 0 0 0 1.973 -2.329l-1.612 -9.671",key:"svg-4"}]]);/**
  * @license @tabler/icons-react v3.34.0 - MIT
  *
  * This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory of this source tree.
- */var z=a("outline","wheat","IconWheat",[["path",{d:"M12.014 21.514v-3.75",key:"svg-0"}],["path",{d:"M5.93 9.504l-.43 1.604c-.712 2.659 .866 5.391 3.524 6.105c.997 .268 1.993 .535 2.99 .801v-3.44c-.164 -2.105 -1.637 -3.879 -3.676 -4.426l-2.408 -.644z",key:"svg-1"}],["path",{d:"M13.744 11.164c.454 -.454 .815 -.994 1.061 -1.587c.246 -.594 .372 -1.23 .372 -1.873c0 -.643 -.126 -1.279 -.372 -1.872c-.246 -.594 -.606 -1.133 -1.061 -1.588l-1.73 -1.73l-1.73 1.73c-.454 .454 -.815 .994 -1.06 1.588c-.246 .594 -.372 1.23 -.373 1.872c0 .643 .127 1.279 .373 1.873c.246 .594 .606 1.133 1.06 1.587",key:"svg-2"}],["path",{d:"M18.099 9.504l.43 1.604c.712 2.659 -.866 5.391 -3.525 6.105c-.997 .268 -1.994 .535 -2.99 .801v-3.44c.164 -2.105 1.637 -3.879 3.677 -4.426l2.408 -.644z",key:"svg-3"}]]);/**
+ */var A=a("outline","scan","IconScan",[["path",{d:"M4 7v-1a2 2 0 0 1 2 -2h2",key:"svg-0"}],["path",{d:"M4 17v1a2 2 0 0 0 2 2h2",key:"svg-1"}],["path",{d:"M16 4h2a2 2 0 0 1 2 2v1",key:"svg-2"}],["path",{d:"M16 20h2a2 2 0 0 0 2 -2v-1",key:"svg-3"}],["path",{d:"M5 12l14 0",key:"svg-4"}]]);/**
  * @license @tabler/icons-react v3.34.0 - MIT
  *
  * This source code is licensed under the MIT license.
  * See the LICENSE file in the root directory of this source tree.
- */var E=a("outline","x","IconX",[["path",{d:"M18 6l-12 12",key:"svg-0"}],["path",{d:"M6 6l12 12",key:"svg-1"}]]);export{E as I,u as a,f as b,w as c,z as d,x as e,m as f,A as g,b as h,C as i};
+ */var b=a("outline","sun","IconSun",[["path",{d:"M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0",key:"svg-0"}],["path",{d:"M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7",key:"svg-1"}]]);/**
+ * @license @tabler/icons-react v3.34.0 - MIT
+ *
+ * This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var E=a("outline","wheat","IconWheat",[["path",{d:"M12.014 21.514v-3.75",key:"svg-0"}],["path",{d:"M5.93 9.504l-.43 1.604c-.712 2.659 .866 5.391 3.524 6.105c.997 .268 1.993 .535 2.99 .801v-3.44c-.164 -2.105 -1.637 -3.879 -3.676 -4.426l-2.408 -.644z",key:"svg-1"}],["path",{d:"M13.744 11.164c.454 -.454 .815 -.994 1.061 -1.587c.246 -.594 .372 -1.23 .372 -1.873c0 -.643 -.126 -1.279 -.372 -1.872c-.246 -.594 -.606 -1.133 -1.061 -1.588l-1.73 -1.73l-1.73 1.73c-.454 .454 -.815 .994 -1.06 1.588c-.246 .594 -.372 1.23 -.373 1.872c0 .643 .127 1.279 .373 1.873c.246 .594 .606 1.133 1.06 1.587",key:"svg-2"}],["path",{d:"M18.099 9.504l.43 1.604c.712 2.659 -.866 5.391 -3.525 6.105c-.997 .268 -1.994 .535 -2.99 .801v-3.44c.164 -2.105 1.637 -3.879 3.677 -4.426l2.408 -.644z",key:"svg-3"}]]);/**
+ * @license @tabler/icons-react v3.34.0 - MIT
+ *
+ * This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var W=a("outline","x","IconX",[["path",{d:"M18 6l-12 12",key:"svg-0"}],["path",{d:"M6 6l12 12",key:"svg-1"}]]);export{W as I,u as a,f as b,w as c,E as d,x as e,I as f,z as g,b as h,S as i,A as j,C as k};
