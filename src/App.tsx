@@ -13,12 +13,20 @@ import {
   Group,
   Paper,
   rem,
+  ActionIcon,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { IconScan, IconInfoCircle, IconX } from "@tabler/icons-react";
+import {
+  IconScan,
+  IconInfoCircle,
+  IconX,
+  IconSun,
+  IconMoon,
+} from "@tabler/icons-react";
 import BarcodeScanner from "./components/BarcodeScanner";
 import NutritionFacts from "./components/NutritionFacts";
 import { getNutritionData } from "./services/nutritionApi";
+import { useTheme } from "./hooks/useTheme";
 import "./App.css";
 
 export interface Product {
@@ -57,6 +65,7 @@ function App() {
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [scannerKey, setScannerKey] = useState(0); // Key to force remount
+  const { colorScheme, toggleColorScheme } = useTheme();
 
   const handleScanStart = () => {
     setIsScanning(true);
@@ -124,13 +133,11 @@ function App() {
       padding="md"
       style={{
         minHeight: "100vh",
-        backgroundColor: "#ffffff",
       }}
     >
       <AppShell.Header
         style={{
-          backgroundColor: "white",
-          borderBottom: "2px solid #e9ecef",
+          borderBottom: "2px solid var(--mantine-color-default-border)",
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
         }}
       >
@@ -139,16 +146,32 @@ function App() {
             <Title order={2} c="blue" fw={700}>
               carbs are HERE
             </Title>
-            {(product || error) && (
-              <Button
+            <Group gap="sm">
+              <ActionIcon
                 variant="light"
-                size="sm"
-                onClick={handleReset}
-                leftSection={<IconX size={16} />}
+                size="lg"
+                onClick={toggleColorScheme}
+                title={`Switch to ${
+                  colorScheme === "dark" ? "light" : "dark"
+                } mode`}
               >
-                Reset
-              </Button>
-            )}
+                {colorScheme === "dark" ? (
+                  <IconSun size={18} />
+                ) : (
+                  <IconMoon size={18} />
+                )}
+              </ActionIcon>
+              {(product || error) && (
+                <Button
+                  variant="light"
+                  size="sm"
+                  onClick={handleReset}
+                  leftSection={<IconX size={16} />}
+                >
+                  Reset
+                </Button>
+              )}
+            </Group>
           </Group>
         </Container>
       </AppShell.Header>
@@ -195,20 +218,13 @@ function App() {
                 </Button>
               </Paper>
 
-              <Card
-                shadow="lg"
-                padding="lg"
-                radius="md"
-                withBorder
-                style={{
-                  backgroundColor: "white",
-                  border: "1px solid #e9ecef",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-                }}
-              >
+              <Card shadow="lg" padding="lg" radius="md" withBorder>
                 <Stack gap="sm">
                   <Group>
-                    <IconInfoCircle size={20} color="blue" />
+                    <IconInfoCircle
+                      size={20}
+                      style={{ color: "var(--mantine-primary-color-filled)" }}
+                    />
                     <Text fw={500}>How it works</Text>
                   </Group>
                   <Text size="sm" c="dimmed">
