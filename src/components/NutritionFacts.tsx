@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   Text,
@@ -12,7 +12,6 @@ import {
   Grid,
   Paper,
   ThemeIcon,
-  Switch,
 } from "@mantine/core";
 import {
   IconFlame,
@@ -29,8 +28,6 @@ interface NutritionFactsProps {
 }
 
 const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
-  const [useKcal, setUseKcal] = useState(false); // true for kcal, false for cal
-
   const getNutritionGradeColor = (grade: string) => {
     switch (grade?.toLowerCase()) {
       case "a":
@@ -188,7 +185,11 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
           <Paper
             p="sm"
             radius="md"
-            style={{ backgroundColor: "var(--mantine-color-blue-0)" }}
+            withBorder
+            style={{ 
+              backgroundColor: 'var(--mantine-color-primary-light)',
+              borderColor: 'var(--mantine-color-primary-outline)'
+            }}
           >
             <Group justify="space-between" align="center">
               <Group gap="sm">
@@ -196,33 +197,14 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
                   <IconFlame size={20} />
                 </ThemeIcon>
                 <div>
-                  <Group gap="xs" align="center">
-                    <Text fw={500}>Calories</Text>
-                    <Switch
-                      size="xs"
-                      checked={useKcal}
-                      onChange={(event) =>
-                        setUseKcal(event.currentTarget.checked)
-                      }
-                      onLabel="kcal"
-                      offLabel="cal"
-                      color="blue"
-                      title={
-                        useKcal
-                          ? "Switch to calories (cal)"
-                          : "Switch to kilocalories (kcal)"
-                      }
-                    />
-                  </Group>
+                  <Text fw={500}>Calories</Text>
                   <Text size="sm" c="dimmed">
-                    Energy {useKcal ? "(kilocalories)" : "(calories)"}
+                    Energy (kilocalories)
                   </Text>
                 </div>
               </Group>
-              <Text size="xl" fw={700} c="blue">
-                {useKcal
-                  ? `${calories.toFixed(0)} kcal`
-                  : `${calories.toFixed(0)} cal`}
+              <Text size="xl" fw={700} c="var(--mantine-primary-color-filled)">
+                {calories.toFixed(0)} kcal
               </Text>
             </Group>
           </Paper>
