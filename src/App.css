@@ -1,0 +1,92 @@
+/* Mobile-first styles for Carbs Are Here */
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+  .scan-button {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+  
+  .nutrition-card {
+    margin: 0.5rem;
+  }
+  
+  .barcode-scanner {
+    width: 100%;
+    height: 60vh;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .scan-button {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .nutrition-card {
+    margin: 1rem;
+  }
+  
+  .barcode-scanner {
+    height: 50vh;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1025px) {
+  .scan-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .nutrition-card {
+    margin: 1.5rem;
+  }
+  
+  .barcode-scanner {
+    height: 40vh;
+  }
+}
+
+/* Ensure proper touch targets on mobile */
+@media (max-width: 768px) {
+  button, 
+  .mantine-Button-root {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .mantine-ActionIcon-root {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Custom scrollbar for mobile */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
