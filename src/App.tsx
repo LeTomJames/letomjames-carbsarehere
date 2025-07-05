@@ -147,6 +147,16 @@ function App() {
               carbs are HERE
             </Title>
             <Group gap="sm">
+              {(product || error) && (
+                <Button
+                  variant="light"
+                  size="sm"
+                  onClick={handleReset}
+                  leftSection={<IconX size={16} />}
+                >
+                  Reset
+                </Button>
+              )}
               <ActionIcon
                 variant="light"
                 size="lg"
@@ -161,16 +171,6 @@ function App() {
                   <IconMoon size={18} />
                 )}
               </ActionIcon>
-              {(product || error) && (
-                <Button
-                  variant="light"
-                  size="sm"
-                  onClick={handleReset}
-                  leftSection={<IconX size={16} />}
-                >
-                  Reset
-                </Button>
-              )}
             </Group>
           </Group>
         </Container>
