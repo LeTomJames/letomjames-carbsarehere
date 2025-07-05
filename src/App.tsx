@@ -123,14 +123,9 @@ function App() {
       >
         <Container size="sm" h="100%">
           <Group h="100%" justify="space-between">
-            <Group gap="sm">
-              <Text size="xl" className="food-emojis">
-                🍔🍕🥗🍎🥖🧀
-              </Text>
-              <Title order={2} c="blue" fw={700}>
-                Carbs Are Here
-              </Title>
-            </Group>
+            <Title order={2} c="blue" fw={700}>
+              carbs are HERE
+            </Title>
             {(product || error) && (
               <Button
                 variant="light"
@@ -167,9 +162,6 @@ function App() {
                   boxShadow: "0 8px 32px rgba(76, 110, 245, 0.3)",
                 }}
               >
-                <Title order={1} c="white" mb="md">
-                  🥗 Carbs Are Here
-                </Title>
                 <Text c="white" size="lg" mb="xl">
                   Scan any food barcode to get instant nutrition facts
                 </Text>

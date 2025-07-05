@@ -29,7 +29,7 @@ interface NutritionFactsProps {
 }
 
 const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
-  const [useKcal, setUseKcal] = useState(true); // true for kcal, false for cal
+  const [useKcal, setUseKcal] = useState(false); // true for kcal, false for cal
 
   const getNutritionGradeColor = (grade: string) => {
     switch (grade?.toLowerCase()) {
@@ -170,7 +170,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
               <Text size="xl" fw={700} c="blue">
                 {useKcal
                   ? `${calories.toFixed(0)} kcal`
-                  : `${(calories * 1000).toFixed(0)} cal`}
+                  : `${calories.toFixed(0)} cal`}
               </Text>
             </Group>
           </Paper>

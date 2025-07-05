@@ -56,9 +56,15 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
                 hasDetectedRef.current = true; // Set flag to prevent multiple detections
                 setIsScanning(false);
 
-                // Stop the scanner immediately
+                // Stop the scanner and camera immediately
                 if (codeReader.current) {
                   codeReader.current.reset();
+                }
+
+                // Stop the camera stream
+                if (stream) {
+                  stream.getTracks().forEach((track) => track.stop());
+                  setStream(null);
                 }
 
                 onResult(barcode);
@@ -79,7 +85,7 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
 
     // Start scanning after a small delay to ensure video is ready
     setTimeout(scanBarcode, 500);
-  }, [onResult, onError]);
+  }, [onResult, onError, stream]);
 
   const stopScanning = useCallback(() => {
     setIsScanning(false);
@@ -110,6 +116,14 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
     };
   }, [stopScanning]);
 
+  // Additional cleanup when component unmounts or scanning stops
+  useEffect(() => {
+    if (!isScanning && stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      setStream(null);
+    }
+  }, [isScanning, stream]);
+
   const handleCancel = () => {
     stopScanning();
     onCancel();
@@ -133,6 +147,10 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
           onUserMedia={handleUserMedia}
+          onUserMediaError={(error) => {
+            console.error("Camera error:", error);
+            onError("Failed to access camera. Please check permissions.");
+          }}
           style={{
             width: "100%",
             height: "100%",
