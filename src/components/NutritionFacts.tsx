@@ -186,9 +186,9 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ product }) => {
             p="sm"
             radius="md"
             withBorder
-            style={{ 
-              backgroundColor: 'var(--mantine-color-primary-light)',
-              borderColor: 'var(--mantine-color-primary-outline)'
+            style={{
+              backgroundColor: "var(--mantine-color-primary-light)",
+              borderColor: "var(--mantine-color-primary-outline)",
             }}
           >
             <Group justify="space-between" align="center">
